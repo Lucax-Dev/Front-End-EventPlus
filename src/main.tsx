@@ -12,11 +12,14 @@ import "@fontsource/poppins/latin-700.css"
 
 import './index.css'
 import App from './App.tsx'
+import { AuthProvider } from './context/AuthProvider.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+    <AuthProvider>
     <App />
+    </AuthProvider>
     </BrowserRouter>
   </StrictMode>,
 )
