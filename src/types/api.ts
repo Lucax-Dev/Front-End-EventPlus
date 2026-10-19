@@ -35,6 +35,15 @@ export interface Evento {
     idInstituicaoNavigation?: Instituicao | null;
 }
 
+export interface Comentario {
+    idComentario: string;
+    descricao: string;
+    dataComentario: string;
+    exibe: boolean;
+    idEvento: string | null;
+    idUsuarioNavigation: Usuario | null;
+}
+
 export interface Presenca {
     idPresenca: string;
     situacao: boolean;
@@ -58,8 +67,19 @@ export interface AuthSession extends LoginResponse {
     usuario: Usuario,
 }
 
+export interface ComentarioPayload {
+    descricao: string;
+    idEvento: string;
+    idUsuario: string | null;
+}
+
 export interface PresencaPayload {
     situacao: boolean;
     idEvento: string;
     idUsuario: string | null;
+}
+
+export interface MensagemModeracao {
+    mensagem: string;
+    motivo?: string;
 }

@@ -1,9 +1,21 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import "./Header.css"
 import logoEvent from "../../assets/logo-event.svg";
+import { perfilEhAdministrador, perfilEhOrganizador, useAuth } from "../../context/auth";
 
 function Header() {
+    const { autenticado, usuario, perfil, logout } = useAuth();
+
+    const navigate = useNavigate();
+    const administrador = perfilEhAdministrador(perfil);
+    const organizador = perfilEhOrganizador(perfil);
+
+    function sair() {
+        logout();
+        navigate("/login");
+    }
+
     return (
         <header className="header">
             <div className="header-conteudo">
@@ -18,7 +30,16 @@ function Header() {
                     <Link to="/home#contato">Contatos</Link>
                 </nav>
 
-                <Link to="/login">Entrar</Link>
+                {autenticado ?
+                    <>
+
+                        <Link to="/conta">Minha conta</Link>
+                        <Link onClick={sair} to="/login">Sair</Link>
+                    </>
+                    :
+                    <Link to="/login">Entrar</Link>
+
+                }
             </div>
         </header>
     )

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type PropsWithChildren } from "react";
-import { SESSION_STORAGE_KEY, UNATHORIZED_EVENT } from "../services/api";
+import { axiosInstance, SESSION_STORAGE_KEY, UNATHORIZED_EVENT } from "../services/api";
 import type { AuthSession, LoginPayload } from "../types/api";
 import { authService, usuarioService } from "../services/eventPlusservice";
 import { AuthContext } from "./auth";
@@ -13,6 +13,10 @@ function readSession(): AuthSession | null {
             localStorage.removeItem(SESSION_STORAGE_KEY);
             return null;
         }
+
+        // Configura o token no Axios assim que o app carrega
+        axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${session.token}`;
+
         return session;
     } catch {
         localStorage.removeItem(SESSION_STORAGE_KEY);
@@ -27,8 +31,15 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     function persist(next: AuthSession | null) {
         setSession(next);
-        if (next) localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(next));
-        else localStorage.removeItem(SESSION_STORAGE_KEY);
+        if (next?.token) {
+            localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(next));
+            // Injeta o token do usuário logado no Axios
+            axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${next.token}`;
+        } else {
+            localStorage.removeItem(SESSION_STORAGE_KEY);
+            // Remove o token do Axios ao deslogar
+            delete axiosInstance.defaults.headers.common["Authorization"];
+        }
     }
 
     async function atualizarUsuario() {
@@ -58,7 +69,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
 
     useEffect(() => {
-        const handleUnauthorized = () => setSession(null);
+        const handleUnauthorized = () => persist(null);
         window.addEventListener(UNATHORIZED_EVENT, handleUnauthorized);
         return () => window.removeEventListener(UNATHORIZED_EVENT, handleUnauthorized);
     }, []);
@@ -69,6 +80,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
         if (!restored?.usuario?.idUsuario) {
             setCarregadoSessao(true);
             return;
+        }
+
+        if (restored.token) {
+            axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${restored.token}`;
         }
 
         usuarioService

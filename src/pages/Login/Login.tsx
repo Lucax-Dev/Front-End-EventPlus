@@ -1,17 +1,20 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import logoEvent from "../../assets/logo-event.svg";
 
 import "./Login.css";
 import { useAuth } from "../../context/auth";
 import Botao from "../../components/botao/Botao";
+import Campo from "../../components/campo/Campo";
+import { getApiErrorMessage } from "../../services/api";
 
 function Login() {
     const navigate = useNavigate();
     const { login, autenticado } = useAuth();
+    const location = useLocation();
 
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    const [email, setEmail] = useState("marcelo@google.com");
+    const [senha, setSenha] = useState("admin1234");
     const [erro, setErro] = useState("");
     const [enviando, setEnviando] = useState(false);
 
@@ -19,15 +22,17 @@ function Login() {
         if (autenticado) navigate("/home", { replace: true });
     }, [autenticado, navigate]);
 
-    async function handleSubmit(e: FormEvent) {
-        e.preventDefault();
+    async function entrar(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
         setErro("");
         setEnviando(true);
 
         try {
-            await login({ email, senha });
-        } catch {
-            setErro("E-mail ou senha incorretos.");
+            await login({ email: email.trim(), senha });
+            const state = location.state as { from?: string } | null;
+            navigate(state?.from || "/home", { replace: true });
+        } catch (error) {
+            setErro(getApiErrorMessage(error));
         } finally {
             setEnviando(false);
         }
@@ -36,32 +41,30 @@ function Login() {
     return (
         <main className="login-container">
             <img src={logoEvent} alt="EventPlus logo" />
-
-            <form onSubmit={handleSubmit} className="login-form">
-                {erro && <p className="login-erro">{erro}</p>}
-
+            <form className="Login-form" onSubmit={entrar} noValidate>
                 <div>
-                    <label htmlFor="email">E-mail</label>
-                    <input
+                    <label htmlFor="login-email">E-mail</label>
+                    <Campo 
+                        id="login-email"
                         type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Digite seu e-mail..."
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder="Digite seu e-mail..."
+                        autoComplete="email"
                         required
                     />
                 </div>
 
                 <div>
-                    <label htmlFor="senha">Senha</label>
-                    <input
+                    <label htmlFor="login-senha">Senha</label>
+                    <Campo
+                        id="login-senha"
                         type="password"
-                        name="senha"
-                        id="senha"
-                        placeholder="Digite sua senha..."
                         value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
+                        onChange={(event) => setSenha(event.target.value)}
+                        placeholder="Digite sua senha..."
+                        autoComplete="current-password"
+                        minLength={8}
                         required
                     />
                 </div>
@@ -71,6 +74,7 @@ function Login() {
                     type="submit"
                     disabled={enviando}
                 />
+                {erro ? <p className="login-erro" role="alert">{erro}</p> : null}
             </form>
         </main>
     );
