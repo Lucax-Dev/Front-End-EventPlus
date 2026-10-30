@@ -1,0 +1,130 @@
+.login-page {
+  width: 100%;
+  min-height: calc(100vh - 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 24px;
+  background: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-container {
+  width: min(100%, 356px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: login-enter 420ms ease both;
+}
+
+.login-logo {
+  width: 240px;
+  max-width: 100%;
+  margin-bottom: 48px;
+  object-fit: contain;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Estilização e restrição dos inputs e labels */
+.login-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #151515;
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"],
+.login-form input[type="text"],
+.login-form .campo input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form input:focus {
+  border-color: #B82E45;
+  box-shadow: 0 0 0 3px rgba(184, 46, 69, 0.15);
+}
+
+.forgot-password {
+  margin: -6px 0 10px;
+  color: #888888;
+  font-size: 0.8rem;
+  text-align: right;
+  text-decoration: none;
+  display: block;
+}
+
+.forgot-password:hover {
+  color: #B82E45;
+}
+
+/* Estilização do Botão Entrar */
+.login-form .botao,
+.login-form button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #B82E45;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.login-form .botao:hover,
+.login-form button[type="submit"]:hover {
+  background-color: #962235;
+}
+
+.login-erro {
+  margin-top: -8px;
+  color: #c92a2a;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+/* Animações e Responsividade */
+@keyframes login-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .login-page {
+    padding: 30px 20px;
+  }
+  .login-container {
+    width: 100%;
+  }
+  .login-logo {
+    width: 200px;
+    margin-bottom: 36px;
+  }
+  .login-form {
+    gap: 18px;
+  }
+}

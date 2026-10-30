@@ -1,0 +1,180 @@
+/* Contentor Principal */
+.cadastro-evento-page {
+  width: 100%;
+  max-width: 980px;
+  margin: 30px auto 60px;
+  padding: 0 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #151515;
+}
+
+/* Cabeçalho da Página */
+.cadastro-evento-header {
+  margin-bottom: 32px;
+}
+
+.cadastro-evento-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #151515;
+  margin-bottom: 6px;
+}
+
+.cadastro-evento-header p {
+  color: #666666;
+  font-size: 0.95rem;
+}
+
+/* Card do Formulário */
+.cadastro-evento-secao {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+  margin-bottom: 40px;
+}
+
+.cadastro-evento-secao h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #151515;
+  border-bottom: 2px solid #B82E45;
+  padding-bottom: 6px;
+  display: inline-block;
+}
+
+/* Formulário e Grelhas */
+.cadastro-evento-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-linha {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.campo-grupo label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+.campo-grupo input,
+.campo-grupo select,
+.campo-grupo textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #ffffff;
+  color: #151515;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo-grupo textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus,
+.campo-grupo textarea:focus {
+  border-color: #B82E45;
+  box-shadow: 0 0 0 3px rgba(184, 46, 69, 0.15);
+}
+
+/* Botão de Submissão */
+.form-acoes {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn-cadastrar {
+  padding: 12px 32px;
+  background-color: #B82E45;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-cadastrar:hover {
+  background-color: #962235;
+}
+
+.btn-cadastrar:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Seção de Eventos Cadastrados / Tabela */
+.tabela-container {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+  margin-top: 16px;
+}
+
+.tabela-eventos {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.tabela-eventos th {
+  background-color: #f8f9fa;
+  color: #151515;
+  font-weight: 700;
+  padding: 14px 16px;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.tabela-eventos td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  color: #333333;
+}
+
+.tabela-eventos tr:hover {
+  background-color: #fcfcfc;
+}
+
+.sem-eventos {
+  text-align: center;
+  color: #777777;
+  padding: 32px 0;
+  font-size: 0.95rem;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .cadastro-evento-secao {
+    padding: 20px 16px;
+  }
+  .form-linha {
+    grid-template-columns: 1fr;
+  }
+}

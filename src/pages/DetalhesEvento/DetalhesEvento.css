@@ -1,0 +1,130 @@
+/* Container Principal centralizado no ecrã */
+.detalhes-evento-page {
+  width: 100%;
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Poppins', sans-serif;
+  color: #151515;
+}
+
+/* Banner Superior */
+.detalhes-banner {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.detalhes-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Título Centralizado */
+.detalhes-titulo {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: #151515;
+}
+
+/* Grelha de 2 Colunas */
+.detalhes-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Coluna Esquerda - Abas */
+.detalhes-abas {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.aba-btn {
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 18px;
+  border-radius: 20px;
+  color: #151515;
+  transition: all 0.2s;
+}
+
+/* Estilo da Aba Ativa (Pílula Vermelha) */
+.aba-btn.ativa {
+  background-color: #B82E45;
+  color: #ffffff;
+}
+
+.detalhes-descricao {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333333;
+  text-align: justify;
+}
+
+/* Coluna Direita - Informações Principais */
+.detalhes-info-card h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #151515;
+  padding-bottom: 4px;
+  display: inline-block;
+}
+
+.info-linha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #151515;
+}
+
+.info-linha img, 
+.info-linha svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* Botão Inscrever */
+.btn-inscrever {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 20px;
+  background-color: #B82E45;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-inscrever:hover {
+  background-color: #962235;
+}
+
+/* Responsividade para telemóveis */
+@media (max-width: 768px) {
+  .detalhes-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
